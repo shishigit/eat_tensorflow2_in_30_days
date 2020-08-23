@@ -1,9 +1,5 @@
 # 5-3,激活函数activation
 
-激活函数在深度学习中扮演着非常重要的角色，它给网络赋予了非线性，从而使得神经网络能够拟合任意复杂的函数。
-
-如果没有激活函数，无论多复杂的网络，都等价于单一的线性变换，无法对非线性函数进行拟合。
-
 目前，深度学习中最流行的激活函数为 relu, 但也有些新推出的激活函数，例如 swish、GELU 据称效果优于relu激活函数。
 
 激活函数的综述介绍可以参考下面两篇文章。
@@ -57,9 +53,6 @@ https://zhuanlan.zhihu.com/p/98863801
 
 ![](./data/gelu.png)
 
-```python
-
-```
 
 ### 二，在模型中使用激活函数
 
@@ -79,19 +72,5 @@ model.add(layers.Dense(32,input_shape = (None,16),activation = tf.nn.relu)) #通
 model.add(layers.Dense(10))
 model.add(layers.Activation(tf.nn.softmax))  # 显式添加layers.Activation激活层
 model.summary()
-
-```
-
-```python
-
-```
-
-如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
-
-也可以在公众号后台回复关键字：**加群**，加入读者交流群和大家讨论。
-
-![image.png](./data/Python与算法之美logo.jpg)
-
-```python
 
 ```
