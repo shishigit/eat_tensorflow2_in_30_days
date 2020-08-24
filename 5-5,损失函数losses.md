@@ -2,13 +2,19 @@
 
 一般来说，监督学习的目标函数由损失函数和正则化项组成。（Objective = Loss + Regularization）
 
-对于keras模型，目标函数中的正则化项一般在各层中指定，例如使用Dense的 kernel_regularizer 和 bias_regularizer等参数指定权重使用l1或者l2正则化项，此外还可以用kernel_constraint 和 bias_constraint等参数约束权重的取值范围，这也是一种正则化手段。
+对于keras模型，目标函数中的正则化项一般在各层中指定，
 
-损失函数在模型编译时候指定。对于回归模型，通常使用的损失函数是均方损失函数 mean_squared_error。
+例如使用Dense的 kernel_regularizer 和 bias_regularizer等参数指定权重使用l1或者l2正则化项，
 
-对于二分类模型，通常使用的是二元交叉熵损失函数 binary_crossentropy。
+此外还可以用kernel_constraint 和 bias_constraint等参数约束权重的取值范围，这也是一种正则化手段。
 
-对于多分类模型，如果label是one-hot编码的，则使用类别交叉熵损失函数 categorical_crossentropy。如果label是类别序号编码的，则需要使用稀疏类别交叉熵损失函数 sparse_categorical_crossentropy。
+损失函数在模型编译时候指定。
+
+- 对于回归模型，通常使用的损失函数是均方损失函数 mean_squared_error。
+- 对于二分类模型，通常使用的是二元交叉熵损失函数 binary_crossentropy。
+- 对于多分类模型，
+    -如果label是one-hot编码的，则使用类别交叉熵损失函数 categorical_crossentropy。
+    -如果label是类别序号编码的，则需要使用稀疏类别交叉熵损失函数 sparse_categorical_crossentropy。
 
 如果有需要，也可以自定义损失函数，自定义损失函数需要接收两个张量y_true,y_pred作为输入参数，并输出一个标量作为损失函数值。
 
@@ -26,33 +32,21 @@ from tensorflow.keras import layers,models,losses,regularizers,constraints
 tf.keras.backend.clear_session()
 
 model = models.Sequential()
+
 model.add(layers.Dense(64, input_dim=64,
                 kernel_regularizer=regularizers.l2(0.01), 
                 activity_regularizer=regularizers.l1(0.01),
                 kernel_constraint = constraints.MaxNorm(max_value=2, axis=0))) 
+
 model.add(layers.Dense(10,
         kernel_regularizer=regularizers.l1_l2(0.01,0.01),activation = "sigmoid"))
+
 model.compile(optimizer = "rmsprop",
         loss = "binary_crossentropy",metrics = ["AUC"])
+
 model.summary()
 
 ```
-
-```
-Model: "sequential"
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-dense (Dense)                (None, 64)                4160      
-_________________________________________________________________
-dense_1 (Dense)              (None, 10)                650       
-=================================================================
-Total params: 4,810
-Trainable params: 4,810
-Non-trainable params: 0
-_________________________________________________________________
-```
-
 
 ### 二，内置损失函数
 
@@ -83,9 +77,6 @@ _________________________________________________________________
 
 * cosine_similarity(余弦相似度，可用于多分类，类实现形式为 CosineSimilarity)
 
-```python
-
-```
 
 ### 三，自定义损失函数
 
@@ -142,19 +133,5 @@ class FocalLoss(tf.keras.losses.Loss):
         modulating_factor = tf.pow(1.0 - p_t, self.gamma)
         loss = tf.reduce_sum(alpha_factor * modulating_factor * bce,axis = -1 )
         return loss
-
-```
-
-```python
-
-```
-
-如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
-
-也可以在公众号后台回复关键字：**加群**，加入读者交流群和大家讨论。
-
-![image.png](./data/Python与算法之美logo.jpg)
-
-```python
 
 ```
