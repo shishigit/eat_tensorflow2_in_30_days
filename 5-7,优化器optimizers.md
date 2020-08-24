@@ -1,12 +1,8 @@
 # 5-7,优化器optimizers
 
-机器学习界有一群炼丹师，他们每天的日常是：
+机器学习也是一样，模型优化算法的选择直接关系到最终模型的性能。
 
-拿来药材（数据），架起八卦炉（模型），点着六味真火（优化算法），就摇着蒲扇等着丹药出炉了。
-
-不过，当过厨子的都知道，同样的食材，同样的菜谱，但火候不一样了，这出来的口味可是千差万别。火小了夹生，火大了易糊，火不匀则半生半糊。
-
-机器学习也是一样，模型优化算法的选择直接关系到最终模型的性能。有时候效果不好，未必是特征的问题或者模型设计的问题，很可能就是优化算法的问题。
+有时候效果不好，未必是特征的问题或者模型设计的问题，很可能就是优化算法的问题。
 
 深度学习优化算法大概经历了 SGD -> SGDM -> NAG ->Adagrad -> Adadelta(RMSprop) -> Adam -> Nadam 这样的发展历程。
 
@@ -21,9 +17,6 @@ https://zhuanlan.zhihu.com/p/32230623
 此外目前也有一些前沿的优化算法，据称效果比Adam更好，例如LazyAdam, Look-ahead, RAdam, Ranger等.
 
 
-```python
-
-```
 
 ### 一，优化器的使用
 
@@ -99,10 +92,6 @@ tf.print("x =",x)
 ```
 
 ```python
-
-```
-
-```python
 # 求f(x) = a*x**2 + b*x + c的最小值
 
 # 使用optimizer.minimize
@@ -127,10 +116,6 @@ def train(epoch = 1000):
 train(1000)
 tf.print("y = ",f())
 tf.print("x = ",x)
-
-```
-
-```python
 
 ```
 
@@ -175,10 +160,6 @@ tf.print("x=",model.x)
 tf.print("loss=",model(tf.constant(0.0)))
 ```
 
-```python
-
-```
-
 ### 二，内置优化器
 
 
@@ -197,21 +178,3 @@ tf.print("loss=",model(tf.constant(0.0)))
 * Adam, 同时考虑了一阶动量和二阶动量，可以看成RMSprop上进一步考虑了一阶动量。
 
 * Nadam, 在Adam基础上进一步考虑了 Nesterov Acceleration。
-
-```python
-
-```
-
-如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
-
-也可以在公众号后台回复关键字：**加群**，加入读者交流群和大家讨论。
-
-![image.png](./data/Python与算法之美logo.jpg)
-
-```python
-
-```
-
-```python
-
-```
